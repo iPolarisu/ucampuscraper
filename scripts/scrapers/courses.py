@@ -8,9 +8,12 @@ def get_available_courses(year, season):
     
     for department in DEPARTMENTS:
         department_code = DEPARTMENTS[department]
-        department_url = department_courses_url(department_code, year, season)
-        department_courses = department_courses_data(department_url)
-        available_courses[department] = department_courses
+        try:
+            department_url = department_courses_url(department_code, year, season)
+            department_courses = department_courses_data(department_url)
+            available_courses[department] = department_courses
+        except:
+            print(f"WARNING: Could not get data for {department} (code: {department_code}) during {year}-{season}, check README for details.")
     
     return available_courses
 
