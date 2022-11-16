@@ -2,8 +2,7 @@ import sys
 import json
 from scrapers.courses import get_available_courses
 
-FILE_NAME = "courses.json"
-PATH = "../output"+FILE_NAME
+PATH = "output/"
 CURRENT_YEAR = 2022
 
 if __name__ == "__main__":
@@ -32,12 +31,13 @@ if __name__ == "__main__":
         data = get_available_courses(year, season)
 
         print("Dumping data to json file")
-        with open("output/courses.json", "w", encoding ='utf8') as outfile:
+        file_path = f"{PATH}courses-{year}-{season}.json"
+        with open(file_path, "w", encoding ='utf8') as outfile:
             json.dump(data, outfile, indent = 4, ensure_ascii= False)
             outfile.close()
+        print(f"All done, check {file_path}")
 
     except:
         print("ERROR: Could not get the requested data, check the README for details on common errors.")
 
-    print("All done, check output/courses.json")
     exit(0)
